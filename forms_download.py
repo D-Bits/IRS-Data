@@ -16,6 +16,7 @@ def download_files(url):
     #print(links)
     for a in soup.select('.LeftCellSpacer td a'):
         res = requests.get(a, stream=True)
+        print(res.status_code)
         with open(f"./pdfs/{a}.pdf") as f:
             f.write(res.content)
     #downloads = requests.get(links)
