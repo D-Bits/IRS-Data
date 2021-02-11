@@ -16,7 +16,7 @@ A tool to scrape data for IRS forms from their [website](https://apps.irs.gov/ap
 - Activate venv:
     * `source env/bin/activate` on Unix-like systems
     * `env/scripts/activate` on Windows
-- Install dependencies by running `pip install -r requirements.txt`.
+- Install dependencies by running `pip3 install -r requirements.txt`.
 
 Assuming you were able to complete all the above steps without problems, you should be ready to run the program.
 
