@@ -3,8 +3,8 @@ import requests
 from time import time
 
 
-def get_links(period, url):
-
+# Fetch all the URLs from the website to download PDFs, within a range of years
+def get_links(year_range: range, url:str):
     session = requests.session()
     session.proxies = {}
     user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36'
@@ -14,17 +14,16 @@ def get_links(period, url):
     if req.status_code != 200:
         print("ERROR:", req.status_code)
     soup = BeautifulSoup(req.content, features="lxml")
-    time_range = [int(l.text.strip()) for l in soup.select('tr td.EndCellSpacer')]
-    if period in time_range:
-        links = [l['href'] for l in soup.select('td.LeftCellSpacer a[href]')]
-    # with open('to_download.csv', 'a+') as to_download:
-    #     writer = csv.writer(to_download)
-    #     for l in links:
-    #         writer.writerow(l)
-        return links
+    links = []
+    for row in soup.select('tr.even'):
+        year = int(row.select('td.EndCellSpacer')[0].text.strip())
+        link = row.select('td.LeftCellSpacer a[href]')[0]['href']
+        if year in year_range:
+            links.append(link)
+            return links
 
     
-def download_pdfs(links):
+def download_pdfs(links: list):
 
     # Get dates from the "Revision Date" field on website
     for url in links:
