@@ -25,8 +25,4 @@ Assuming you were able to complete all the above steps without problems, you sho
 - `forms_data.py`: Get meta data for the IRS forms.
 - `forms_download.py`: Download files within a specific data range. 
 
-## Running the Crawlers
-
-To scrape data, run the Python scripts in the repository (make sure your venv is active): 
-
-
+To scrape data, make sure your venv is active, and run the Python scripts in the repository with `python3 <file_name>`.
